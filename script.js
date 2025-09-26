@@ -515,3 +515,31 @@ function downloadPreviewImage() {
         .catch(() => alert('An error occurred while downloading the image.'));
 }
 
+
+
+// DARK MODE TOGGLE
+const darkModeToggle = document.getElementById('dark-mode-toggle');
+
+// Load saved preference on page load
+if(localStorage.getItem('darkMode') === 'enabled') {
+    document.documentElement.classList.add('dark');
+    darkModeToggle.textContent = '☀️';
+} else {
+    darkModeToggle.textContent = '🌙';
+}
+
+// Toggle dark mode on button click
+darkModeToggle.addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark');
+
+    if(document.documentElement.classList.contains('dark')) {
+        localStorage.setItem('darkMode', 'enabled');
+        darkModeToggle.textContent = '☀️'; // sun icon
+    } else {
+        localStorage.setItem('darkMode', 'disabled');
+        darkModeToggle.textContent = '🌙'; // moon icon
+    }
+});
+
+
+
