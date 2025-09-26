@@ -253,7 +253,7 @@ function updateUIForAuthState(user) {
         `;
         document.getElementById('sign-out-btn-desktop').addEventListener('click', () => signOut(auth));
         document.getElementById('sign-out-btn-mobile').addEventListener('click', () => signOut(auth));
-        fetchUserCredits(user);
+        // fetchUserCredits(user);
     } else {
         nav.innerHTML = `
             <a href="pricing.html" class="text-sm font-medium text-gray-700 hover:bg-[#517CBE]/10 rounded-full px-3 py-1 transition-colors">Pricing</a>
@@ -366,16 +366,29 @@ async function handleImageGenerationRequest(promptOverride = null, fromRegenerat
         //     headers: { 'Authorization': `Bearer ${token}` }
         // });
 
-        if (!deductResponse.ok) throw new Error('Credit deduction failed. Please try again.');
+        // if (!deductResponse.ok) throw new Error('Credit deduction failed. Please try again.');
         
-        const creditData = await deductResponse.json();
-        currentUserCredits = creditData.newCredits;
-        updateCreditsDisplay(currentUserCredits);
+        // const creditData = await deductResponse.json();
+        // currentUserCredits = creditData.newCredits;
+        // updateCreditsDisplay(currentUserCredits);
 
-        const response = await fetch('/api/generate', {
+        // const response = await fetch('/api/generate', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        //     body: JSON.stringify({ prompt, imageData: generationInputData, aspectRatio: aspectRatioToSend })
+        // });
+
+       const response = await fetch('/api/generate', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-            body: JSON.stringify({ prompt, imageData: generationInputData, aspectRatio: aspectRatioToSend })
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ 
+                prompt, 
+                imageData: generationInputData, 
+                aspectRatio: aspectRatioToSend 
+            })
         });
 
         if (!response.ok) {
@@ -515,6 +528,7 @@ function downloadPreviewImage() {
         })
         .catch(() => alert('An error occurred while downloading the image.'));
 }
+
 
 
 
