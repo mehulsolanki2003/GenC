@@ -335,10 +335,10 @@ async function handleImageGenerationRequest(promptOverride = null, fromRegenerat
         toggleModal(DOMElements.authModal, true);
         return;
     }
-    if (currentUserCredits <= 0) {
-        toggleModal(DOMElements.outOfCreditsModal, true);
-        return;
-    }
+    // if (currentUserCredits <= 0) {
+    //     toggleModal(DOMElements.outOfCreditsModal, true);
+    //     return;
+    // }
 
     const imageDataSource = fromRegenerate ? currentPreviewInputData : uploadedImageData;
     const prompt = fromRegenerate ? promptOverride : DOMElements.promptInput.value.trim();
@@ -359,17 +359,22 @@ async function handleImageGenerationRequest(promptOverride = null, fromRegenerat
 
     try {
         const token = await currentUser.getIdToken();
-        
-        const deductResponse = await fetch('/api/credits', {
-            method: 'POST',
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
 
-        if (!deductResponse.ok) throw new Error('Credit deduction failed. Please try again.');
+      currentUserCredits = "∞"; // show unlimited for display
+      updateCreditsDisplay(currentUserCredits);
+
         
-        const creditData = await deductResponse.json();
-        currentUserCredits = creditData.newCredits;
-        updateCreditsDisplay(currentUserCredits);
+        // const deductResponse = await fetch('/api/credits', {
+        //     method: 'POST',
+        //     headers: { 'Authorization': `Bearer ${token}` }
+        // });
+
+        // if (!deductResponse.ok) throw new Error('Credit deduction failed. Please try again.');
+        
+        // const creditData = await deductResponse.json();
+        // currentUserCredits = creditData.newCredits;
+        // updateCreditsDisplay(currentUserCredits);
+      
 
         const response = await fetch('/api/generate', {
             method: 'POST',
@@ -514,5 +519,6 @@ function downloadPreviewImage() {
         })
         .catch(() => alert('An error occurred while downloading the image.'));
 }
+
 
 
