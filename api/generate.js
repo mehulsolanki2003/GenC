@@ -74,20 +74,18 @@ export default async function handler(req, res) {
         // Case 2: Text-to-Image (no imageData)
         // We use the aspect ratio selected by the user, defaulting to '1:1'.
         else {
-            apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
+            
+                // Text-to-Image (Gemini instead of Imagen)
+            apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image-preview:generateContent?key=${apiKey}`;
             payload = {
-                instances: [
-                    {
-                        prompt: {
-                            text: prompt
-                        }
-                    }
-                ],
-                parameters: {
-                    sampleCount: 1,
-                    aspectRatio: aspectRatio || "1:1"
-                }
+                contents: [{
+                    parts: [
+                        { text: prompt }
+                    ]
+                }],
+                generationConfig: { responseModalities: ["IMAGE"], aspectRatio: aspectRatio || "1:1" }
             };
+
         }
 
 
