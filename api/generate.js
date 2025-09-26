@@ -121,7 +121,7 @@
 
 import admin from 'firebase-admin';
 
-// Initialize Firebase Admin SDK (ensure it's initialized only once)
+// Initialize Firebase Admin SDK
 if (!admin.apps.length) {
   try {
     const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
@@ -171,9 +171,10 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: "Server configuration error: API key not found." });
     }
 
-    // Always Gemini
+    // Gemini endpoint (works for both text-to-image & image-to-image)
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image-preview:generateContent?key=${apiKey}`;
 
+    // Build parts array
     let parts = [];
     if (prompt) parts.push({ text: prompt });
     if (imageData && imageData.data) {
@@ -186,9 +187,14 @@ export default async function handler(req, res) {
     }
 
     const payload = {
-      contents: [{ parts }],
+      contents: [
+        {
+          role: "user",
+          parts
+        }
+      ],
       generationConfig: {
-        responseModalities: ["IMAGE"],
+        responseMimeType: "image/png", // Required
         aspectRatio: aspectRatio || "1:1"
       }
     };
@@ -213,3 +219,4 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'The API function crashed.', details: error.message });
   }
 }
+
