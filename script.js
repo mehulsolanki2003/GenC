@@ -4,13 +4,13 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChang
 import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCcSkzSdz_GtjYQBV5sTUuPxu1BwTZAq7Y",
-    authDomain: "genart-a693a.firebaseapp.com",
-    projectId: "genart-a693a",
-    storageBucket: "genart-a693a.appspot.com",
-    messagingSenderId: "96958671615",
-    appId: "1:96958671615:web:6a0d3aa6bf42c6bda17aca",
-    measurementId: "G-EDCW8VYXY6"
+  apiKey: "AIzaSyBWDZZ-zLYyCrvnnnTeZ1w_IBWQvTrf-hM",
+  authDomain: "gena-c597d.firebaseapp.com",
+  projectId: "gena-c597d",
+  storageBucket: "gena-c597d.firebasestorage.app",
+  messagingSenderId: "926192855864",
+  appId: "1:926192855864:web:728ec3e47624fe2d672fcd",
+  measurementId: "G-SYK9TMY47N"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -514,4 +514,5 @@ function downloadPreviewImage() {
         })
         .catch(() => alert('An error occurred while downloading the image.'));
 }
+
 
