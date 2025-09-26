@@ -1,8 +1,7 @@
 // --- Firebase and Auth Initialization ---
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-// import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBWDZZ-zLYyCrvnnnTeZ1w_IBWQvTrf-hM",
@@ -325,77 +324,41 @@ function closeAllModals() {
     document.querySelectorAll('[role="dialog"]').forEach(modal => toggleModal(modal, false));
 }
 
-// function signInWithGoogle() {
-//     signInWithPopup(auth, provider).catch(console.error);
-// }
-
-// replace old function
-async function signInWithGoogle() {
-  try {
-    const result = await signInWithPopup(auth, provider);
-    // result.user signed-in
-    await assignInitialCredits(result.user); // ensures DB record exists
-    await fetchUserCredits(result.user);     // sync client state
-  } catch (error) {
-    console.error('Sign-in error:', error);
-  }
+function signInWithGoogle() {
+    signInWithPopup(auth, provider).catch(console.error);
 }
 
-onAuthStateChanged(auth, user => {
-  updateUIForAuthState(user);
-  if (user) fetchUserCredits(user);
-});
 
 
 
-// async function assignInitialCredits(user) {
-//   if (!user) return;
-//   try {
-//     const userRef = doc(db, 'users', user.uid);
-//     const snap = await getDoc(userRef);
-
-//     // If doc exists, do nothing (user already has a record)
-//     if (snap.exists()) {
-//       const data = snap.data();
-//       // Optionally sync client state from DB:
-//       if (typeof data.credits === 'number') {
-//         currentUserCredits = data.credits;
-//         updateCreditsDisplay(currentUserCredits);
-//       }
-//       return;
-//     }
-
-//     // Create user doc with initial credits
-//     const initialCredits = 5;
-//     await setDoc(userRef, {
-//       credits: initialCredits,
-//       createdAt: serverTimestamp(),
-//       lastCreditAssignment: serverTimestamp()
-//     });
-//     currentUserCredits = initialCredits;
-//     updateCreditsDisplay(currentUserCredits);
-//   } catch (err) {
-//     console.error('assignInitialCredits error:', err);
-//   }
-// }
-
-
-async function fetchUserCredits(user) {
+async function assignInitialCredits(user) {
   if (!user) return;
   try {
     const userRef = doc(db, 'users', user.uid);
     const snap = await getDoc(userRef);
-    if (!snap.exists()) {
-      // create initial record if you'd like:
-      await assignInitialCredits(user);
+
+    // If doc exists, do nothing (user already has a record)
+    if (snap.exists()) {
+      const data = snap.data();
+      // Optionally sync client state from DB:
+      if (typeof data.credits === 'number') {
+        currentUserCredits = data.credits;
+        updateCreditsDisplay(currentUserCredits);
+      }
       return;
     }
-    const data = snap.data();
-    currentUserCredits = (typeof data.credits === 'number') ? data.credits : 0;
+
+    // Create user doc with initial credits
+    const initialCredits = 5;
+    await setDoc(userRef, {
+      credits: initialCredits,
+      createdAt: serverTimestamp(),
+      lastCreditAssignment: serverTimestamp()
+    });
+    currentUserCredits = initialCredits;
     updateCreditsDisplay(currentUserCredits);
   } catch (err) {
-    console.error('Error fetching credits from Firestore:', err);
-    updateCreditsDisplay('Error');
+    console.error('assignInitialCredits error:', err);
   }
 }
 
@@ -410,10 +373,10 @@ async function handleImageGenerationRequest(promptOverride = null, fromRegenerat
         return;
     }
   
-    // if (currentUserCredits <= 0) {
-    //     toggleModal(DOMElements.outOfCreditsModal, true);
-    //     return;
-    // }
+    if (currentUserCredits <= 0) {
+        toggleModal(DOMElements.outOfCreditsModal, true);
+        return;
+    }
 
     const imageDataSource = fromRegenerate ? currentPreviewInputData : uploadedImageData;
     const prompt = fromRegenerate ? promptOverride : DOMElements.promptInput.value.trim();
@@ -435,22 +398,22 @@ async function handleImageGenerationRequest(promptOverride = null, fromRegenerat
     try {
         const token = await currentUser.getIdToken();
         
-        // const deductResponse = await fetch('/api/credits', {
-        //     method: 'POST',
-        //     headers: { 'Authorization': `Bearer ${token}` }
-        // });
+        const deductResponse = await fetch('/api/credits', {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
 
-        // if (!deductResponse.ok) throw new Error('Credit deduction failed. Please try again.');
+        if (!deductResponse.ok) throw new Error('Credit deduction failed. Please try again.');
         
-        // const creditData = await deductResponse.json();
-        // currentUserCredits = creditData.newCredits;
-        // updateCreditsDisplay(currentUserCredits);
+        const creditData = await deductResponse.json();
+        currentUserCredits = creditData.newCredits;
+        updateCreditsDisplay(currentUserCredits);
 
-        // const response = await fetch('/api/generate', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-        //     body: JSON.stringify({ prompt, imageData: generationInputData, aspectRatio: aspectRatioToSend })
-        // });
+        const response = await fetch('/api/generate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+            body: JSON.stringify({ prompt, imageData: generationInputData, aspectRatio: aspectRatioToSend })
+        });
 
        const response = await fetch('/api/generate', {
             method: 'POST',
