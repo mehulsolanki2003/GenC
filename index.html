@@ -25,8 +25,9 @@
                 <!-- Auth state content injected by script.js -->
                 </div>
                 
-                 <button onclick="document.documentElement.classList.toggle('dark')">🌙</button>
-                
+               <button id="dark-mode-toggle" class="ml-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                   🌙
+               </button>
                 <button id="mobile-menu-btn" class="md:hidden p-2 rounded-full bg-white/70 backdrop-blur-md border border-slate-200/80 text-slate-800 z-50">
                     <svg id="menu-open-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -259,6 +260,7 @@
         <script type="module" src="script.js"></script>
     </body>
 </html>
+
 
 
 
