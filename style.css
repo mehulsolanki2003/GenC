@@ -201,3 +201,38 @@ header.scrolled #header-nav {
     }
 }
 
+/* style.css */
+body {
+    @apply bg-white text-gray-800;
+}
+
+.dark body {
+    @apply bg-gray-900 text-gray-200;
+}
+
+/* Example for cards */
+.stat-card {
+    @apply bg-white shadow-md rounded-lg p-4;
+}
+.dark .stat-card {
+    @apply bg-gray-800 shadow-lg;
+}
+
+/* Hero section */
+#hero-section h1 {
+    @apply text-gray-800;
+}
+.dark #hero-section h1 {
+    @apply text-gray-200;
+}
+
+/* Footer / Prompt bar */
+#prompt-bar-container {
+    @apply bg-white/70;
+}
+.dark #prompt-bar-container {
+    @apply bg-gray-800/70;
+}
+
+
+
