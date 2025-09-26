@@ -88,6 +88,7 @@ export default async function handler(req, res) {
                     aspectRatio: aspectRatio || "1:1"
                 }
             };
+        }
 
 
             
