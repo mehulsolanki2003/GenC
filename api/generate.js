@@ -75,11 +75,28 @@ export default async function handler(req, res) {
         // We use the aspect ratio selected by the user, defaulting to '1:1'.
         else {
             apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
-            payload = { 
-                instances: [{ prompt }], 
-                parameters: { "sampleCount": 1, "aspectRatio": aspectRatio || "1:1" }
+            payload = {
+                instances: [
+                    {
+                        prompt: {
+                            text: prompt
+                        }
+                    }
+                ],
+                parameters: {
+                    sampleCount: 1,
+                    aspectRatio: aspectRatio || "1:1"
+                }
             };
-        }
+
+
+            
+        //     apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
+        //     payload = { 
+        //         instances: [{ prompt }], 
+        //         parameters: { "sampleCount": 1, "aspectRatio": aspectRatio || "1:1" }
+        //     };
+        // }
 
         const apiResponse = await fetch(apiUrl, {
             method: 'POST',
