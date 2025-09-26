@@ -528,6 +528,7 @@ if(localStorage.getItem('darkMode') === 'enabled') {
     darkModeToggle.textContent = '🌙';
 }
 
+
 // Toggle dark mode on button click
 darkModeToggle.addEventListener('click', () => {
     document.documentElement.classList.toggle('dark');
@@ -540,6 +541,7 @@ darkModeToggle.addEventListener('click', () => {
         darkModeToggle.textContent = '🌙'; // moon icon
     }
 });
+
 
 
 
