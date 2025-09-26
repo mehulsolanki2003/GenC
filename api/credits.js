@@ -72,11 +72,16 @@ export default async function handler(req, res) {
 
         // Handle POST request (Deduct credit)
         if (req.method === 'POST') {
-            // Credit deduction logic has been removed.
-            // We simply return the user's current credits without decrementing them.
             const userDoc = await userRef.get();
-            const credits = userDoc.exists ? userDoc.data().credits : 9999;
-            return res.status(200).json({ newCredits: credits });
+            if (!userDoc.exists || userDoc.data().credits <= 0) {
+                return res.status(402).json({ error: 'Insufficient credits.' });
+            }
+
+            await userRef.update({
+                credits: admin.firestore.FieldValue.increment(-1)
+            });
+            const updatedDoc = await userRef.get();
+            return res.status(200).json({ newCredits: updatedDoc.data().credits });
         }
 
         return res.status(405).json({ error: 'Method Not Allowed' });
