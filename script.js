@@ -4,13 +4,13 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChang
 import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBWDZZ-zLYyCrvnnnTeZ1w_IBWQvTrf-hM",
-  authDomain: "gena-c597d.firebaseapp.com",
-  projectId: "gena-c597d",
-  storageBucket: "gena-c597d.firebasestorage.app",
-  messagingSenderId: "926192855864",
-  appId: "1:926192855864:web:728ec3e47624fe2d672fcd",
-  measurementId: "G-SYK9TMY47N"
+    apiKey: "AIzaSyCcSkzSdz_GtjYQBV5sTUuPxu1BwTZAq7Y",
+    authDomain: "genart-a693a.firebaseapp.com",
+    projectId: "genart-a693a",
+    storageBucket: "genart-a693a.appspot.com",
+    messagingSenderId: "96958671615",
+    appId: "1:96958671615:web:6a0d3aa6bf42c6bda17aca",
+    measurementId: "G-EDCW8VYXY6"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -20,7 +20,6 @@ const provider = new GoogleAuthProvider();
 
 // --- Global State ---
 let currentUser;
-let currentUserCredits = 0;
 let isGenerating = false;
 let currentAspectRatio = '1:1';
 let uploadedImageData = null;
@@ -243,17 +242,14 @@ function updateUIForAuthState(user) {
     if (user) {
         nav.innerHTML = `
             <a href="pricing.html" class="text-sm font-medium text-gray-700 hover:bg-[#517CBE]/10 rounded-full px-3 py-1 transition-colors">Pricing</a>
-            <div id="credits-counter" class="text-sm font-medium text-gray-700 px-3 py-1">Credits: ...</div>
             <button id="sign-out-btn-desktop" class="text-sm font-medium text-gray-700 hover:bg-[#517CBE]/10 rounded-full px-3 py-1 transition-colors">Sign Out</button>
         `;
         mobileNav.innerHTML = `
             <a href="pricing.html" class="block text-lg font-semibold text-gray-700 p-3 rounded-lg hover:bg-gray-100">Pricing</a>
-            <div id="credits-counter-mobile" class="text-center text-lg font-semibold text-gray-700 p-3 my-2 border-y">Credits: ...</div>
             <button id="sign-out-btn-mobile" class="w-full text-left text-lg font-semibold text-gray-700 p-3 rounded-lg hover:bg-gray-100">Sign Out</button>
         `;
         document.getElementById('sign-out-btn-desktop').addEventListener('click', () => signOut(auth));
         document.getElementById('sign-out-btn-mobile').addEventListener('click', () => signOut(auth));
-        fetchUserCredits(user);
     } else {
         nav.innerHTML = `
             <a href="pricing.html" class="text-sm font-medium text-gray-700 hover:bg-[#517CBE]/10 rounded-full px-3 py-1 transition-colors">Pricing</a>
@@ -268,27 +264,6 @@ function updateUIForAuthState(user) {
         document.getElementById('sign-in-btn-desktop').addEventListener('click', signInWithGoogle);
         document.getElementById('sign-in-btn-mobile').addEventListener('click', signInWithGoogle);
     }
-}
-
-async function fetchUserCredits(user) {
-    try {
-        const token = await user.getIdToken(true);
-        const response = await fetch('/api/credits', { headers: { 'Authorization': `Bearer ${token}` } });
-        if (!response.ok) throw new Error('Failed to fetch credits');
-        const data = await response.json();
-        currentUserCredits = data.credits;
-        updateCreditsDisplay(currentUserCredits);
-    } catch (error) {
-        console.error("Error fetching credits:", error);
-        updateCreditsDisplay('Error');
-    }
-}
-
-function updateCreditsDisplay(amount) {
-    const creditsCounter = document.getElementById('credits-counter');
-    const creditsCounterMobile = document.getElementById('credits-counter-mobile');
-    if (creditsCounter) creditsCounter.textContent = `Credits: ${amount}`;
-    if (creditsCounterMobile) creditsCounterMobile.textContent = `Credits: ${amount}`;
 }
 
 function autoResizeTextarea(e) {
@@ -335,11 +310,7 @@ async function handleImageGenerationRequest(promptOverride = null, fromRegenerat
         toggleModal(DOMElements.authModal, true);
         return;
     }
-    // if (currentUserCredits <= 0) {
-    //     toggleModal(DOMElements.outOfCreditsModal, true);
-    //     return;
-    // }
-
+    
     const imageDataSource = fromRegenerate ? currentPreviewInputData : uploadedImageData;
     const prompt = fromRegenerate ? promptOverride : DOMElements.promptInput.value.trim();
 
@@ -359,23 +330,7 @@ async function handleImageGenerationRequest(promptOverride = null, fromRegenerat
 
     try {
         const token = await currentUser.getIdToken();
-
-      currentUserCredits = "∞"; // show unlimited for display
-      updateCreditsDisplay(currentUserCredits);
-
         
-        // const deductResponse = await fetch('/api/credits', {
-        //     method: 'POST',
-        //     headers: { 'Authorization': `Bearer ${token}` }
-        // });
-
-        // if (!deductResponse.ok) throw new Error('Credit deduction failed. Please try again.');
-        
-        // const creditData = await deductResponse.json();
-        // currentUserCredits = creditData.newCredits;
-        // updateCreditsDisplay(currentUserCredits);
-      
-
         const response = await fetch('/api/generate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
@@ -519,6 +474,3 @@ function downloadPreviewImage() {
         })
         .catch(() => alert('An error occurred while downloading the image.'));
 }
-
-
-
