@@ -234,11 +234,18 @@ body {
     @apply bg-gray-800/70;
 }
 
+.dark-mode-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+}
+
 .dark body { background-color: #111; color: #eee; }
 
 /* If you’re not using Tailwind, you can add this CSS */
 .star-empty { color: #ccc; }
 .star-filled { color: gold; }
+
 
 
 
