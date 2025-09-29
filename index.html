@@ -24,9 +24,9 @@
         <!-- Full-page animated gradient background -->
         <div id="animated-gradient-bg"></div>
         <!-- Header -->
-        <header class="fixed top-0 left-0 right-0 z-30 p-4 bg-white/80 dark:bg-gray-800/80 transition-all duration-300">
+        <header class="fixed top-0 left-0 right-0 z-30 p-4 transition-all duration-300 bg-white/80 dark:bg-gray-800/80 border-b border-gray-200 dark:border-gray-700">
             <div class="max-w-7xl mx-auto flex justify-between items-center">
-                <a href="index.html">
+                <a href="index.html" class="text-gray-700 dark:text-gray-200">
                     <img src="https://iili.io/FsAoG2I.md.png" alt="GenArt Logo" class="h-6 md:h-7 w-auto">
                 </a>
                 <div id="header-nav" class="hidden md:flex items-center space-x-2 bg-white/70 backdrop-blur-md border border-slate-200/80 shadow-sm rounded-full px-2 py-1">
@@ -36,7 +36,7 @@
                 <button id="dark-mode-toggle" class="ml-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                    🌙
                 </button>
-                <h1 class="ml-4 text-2xl font-bold">Hello Tailwind</h1>
+                
                 <button id="mobile-menu-btn" class="md:hidden p-2 rounded-full bg-white/70 backdrop-blur-md border border-slate-200/80 text-slate-800 z-50">
                     <svg id="menu-open-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -71,23 +71,23 @@
                 <!-- Stats Section -->
                 <section id="stats-section" class="w-full mt-16">
                     <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="stat-card">
+                        <div class="stat-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow transition-colors duration-500">
                             <h3 class="text-4xl md:text-5xl font-bold text-[#517CBE]">
                                 <span class="counter" data-target="50">0</span>
                                 M+
                             </h3>
-                            <p class="text-sm text-gray-500 mt-2">Generations</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Generations</p>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow transition-colors duration-500">
                             <h3 class="text-4xl md:text-5xl font-bold text-[#517CBE]">
                                 <span class="counter" data-target="500">0</span>
                                 K+
                             </h3>
-                            <p class="text-sm text-gray-500 mt-2">Happy Creators</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Happy Creators</p>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow transition-colors duration-500">
                             <h3 class="text-4xl md:text-5xl font-bold text-[#517CBE]">&lt;17s</h3>
-                            <p class="text-sm text-gray-500 mt-2">Avg. Generation Speed</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Avg. Generation Speed</p>
                         </div>
                     </div>
                 </section>
@@ -135,15 +135,15 @@
                             <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2000&auto=format&fit=crop" alt="AI art collage" class="testimonial-image">
                         </div>
                         <div class="testimonial-card-container">
-                            <div class="testimonial-card">
+                            <div class="testimonial-card bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transition-colors duration-500">
                                 <svg class="w-12 h-12 text-gray-400/80 absolute top-8 left-8" fill="currentColor" viewBox="0 0 32 32">
                                     <path d="M9.333 12h-2.667c-1.473 0-2.667 1.193-2.667 2.667v8c0 1.473 1.193 2.667 2.667 2.667h2.667v-13.333zM25.333 12h-2.667c-1.473 0-2.667 1.193-2.667 2.667v8c0 1.473 1.193 2.667 2.667 2.667h2.667v-13.333z"></path>
                                 </svg>
-                                <p class="testimonial-text">"I like to describe it as 'photoshop on steroids.' GenArt's advanced capabilities enable us to seamlessly blend and enhance images, resulting in highly detailed and expressive visual assets."
+                                <p class="testimonial-text ">"I like to describe it as 'photoshop on steroids.' GenArt's advanced capabilities enable us to seamlessly blend and enhance images, resulting in highly detailed and expressive visual assets."
                             </p>
                                 <div class="testimonial-author">
-                                    <p class="font-semibold text-gray-200">Chris Charles</p>
-                                    <p class="text-sm text-gray-400">CEO, Charles Group</p>
+                                    <p class="font-semibold text-gray-800 dark:text-gray-200">Chris Charles</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">CEO, Charles Group</p>
                                 </div>
                             </div>
                         </div>
@@ -152,7 +152,7 @@
             </section>
         </main>
         <!-- Prompt Bar -->
-        <footer class="fixed bottom-0 left-0 right-0 p-4 z-40">
+        <footer class="fixed bottom-0 left-0 right-0 p-4 z-40 bg-white/80 dark:bg-gray-800/80">
             <div id="prompt-bar-container" class="max-w-2xl mx-auto bg-white/70 backdrop-blur-lg border border-gray-200/80 shadow-2xl rounded-full p-2 flex items-center space-x-1.5">
                 <div id="image-preview-container" class="hidden relative w-10 h-10 flex-shrink-0 ml-1">
                     <img id="image-preview" class="w-full h-full object-cover rounded-full" src="" alt="Image preview">
@@ -198,9 +198,9 @@
         </footer>
         <!-- Modals -->
         <div id="auth-modal" role="dialog" aria-hidden="true" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 items-center justify-center p-4" style="display: none;" onclick="this.setAttribute('aria-hidden', 'true')">
-            <div class="bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full text-center" onclick="event.stopPropagation()">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Sign In Required</h2>
-                <p class="text-gray-500 mb-6">Please sign in to continue.</p>
+            <div class="bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 max-w-sm w-full text-center transition-colors duration-500" onclick="event.stopPropagation()">
+                <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-2">Sign In Required</h2>
+                <p class="text-gray-500 dark:text-gray-400  mb-6">Please sign in to continue.</p>
                 <button id="google-signin-btn" class="w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-700 flex items-center justify-center space-x-2">
                     <span>Sign In with Google</span>
                 </button>
@@ -273,6 +273,7 @@
         <script type="module" src="script.js"></script>
     </body>
 </html>
+
 
 
 
