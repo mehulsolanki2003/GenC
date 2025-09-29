@@ -20,11 +20,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
     </head>
-    <body class="transition-colors duration-500">
+    <body class="transition-colors duration-500 bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100">
         <!-- Full-page animated gradient background -->
         <div id="animated-gradient-bg"></div>
         <!-- Header -->
-        <header class="fixed top-0 left-0 right-0 z-30 p-4 transition-all duration-300">
+        <header class="fixed top-0 left-0 right-0 z-30 p-4 bg-white/80 dark:bg-gray-800/80 transition-all duration-300">
             <div class="max-w-7xl mx-auto flex justify-between items-center">
                 <a href="index.html">
                     <img src="https://iili.io/FsAoG2I.md.png" alt="GenArt Logo" class="h-6 md:h-7 w-auto">
@@ -33,9 +33,10 @@
                 <!-- Auth state content injected by script.js -->
                 </div>
                 
-               <button id="dark-mode-toggle" class="ml-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                <button id="dark-mode-toggle" class="ml-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                    🌙
-               </button>
+                </button>
+                <h1 class="ml-4 text-2xl font-bold">Hello Tailwind</h1>
                 <button id="mobile-menu-btn" class="md:hidden p-2 rounded-full bg-white/70 backdrop-blur-md border border-slate-200/80 text-slate-800 z-50">
                     <svg id="menu-open-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -47,6 +48,9 @@
                
 
             </div>
+
+
+            
             <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-white/90 backdrop-blur-xl z-40 p-4 pt-24 dark:text-gray-100">
             <!-- Mobile nav content injected by script.js -->
             </div>
@@ -269,6 +273,7 @@
         <script type="module" src="script.js"></script>
     </body>
 </html>
+
 
 
 
