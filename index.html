@@ -31,11 +31,12 @@
                 </a>
                 <div id="header-nav" class="hidden md:flex items-center space-x-2 bg-white/70 backdrop-blur-md border border-slate-200/80 shadow-sm rounded-full px-2 py-1">
                 <!-- Auth state content injected by script.js -->
+                    
+                    <button id="dark-mode-toggle" class="ml-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                       🌙
+                    </button>
                 </div>
                 
-                <button id="dark-mode-toggle" class="ml-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                   🌙
-                </button>
                 
                 <button id="mobile-menu-btn" class="md:hidden p-2 rounded-full bg-white/70 backdrop-blur-md border border-slate-200/80 text-slate-800 z-50">
                     <svg id="menu-open-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -71,21 +72,21 @@
                 <!-- Stats Section -->
                 <section id="stats-section" class="w-full mt-16">
                     <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="stat-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow transition-colors duration-500">
+                        <div class="stat-card">
                             <h3 class="text-4xl md:text-5xl font-bold text-[#517CBE]">
                                 <span class="counter" data-target="50">0</span>
                                 M+
                             </h3>
                             <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Generations</p>
                         </div>
-                        <div class="stat-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow transition-colors duration-500">
+                        <div class="stat-card">
                             <h3 class="text-4xl md:text-5xl font-bold text-[#517CBE]">
                                 <span class="counter" data-target="500">0</span>
                                 K+
                             </h3>
                             <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Happy Creators</p>
                         </div>
-                        <div class="stat-card bg-white dark:bg-gray-800 p-4 rounded-lg shadow transition-colors duration-500">
+                        <div class="stat-card">
                             <h3 class="text-4xl md:text-5xl font-bold text-[#517CBE]">&lt;17s</h3>
                             <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Avg. Generation Speed</p>
                         </div>
@@ -273,6 +274,7 @@
         <script type="module" src="script.js"></script>
     </body>
 </html>
+
 
 
 
