@@ -9,7 +9,8 @@
         
         <script src="https://cdn.tailwindcss.com"></script>
            <!-- Tailwind CDN with dark mode enabled -->
-        <script>
+
+        
           tailwind.config = {
             darkMode: 'class'
           }
@@ -149,6 +150,63 @@
                 </div>
             </section>
         </main>
+
+        <section id="virtual-tryon" class="py-20 bg-gray-50 dark:bg-gray-900">
+          <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-gray-800 dark:text-white mb-10">
+              👗 Virtual Fashion Try-On
+            </h2>
+        
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+              
+              <!-- Upload User Photo -->
+              <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
+                <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-100">
+                  Upload Your Photo
+                </h3>
+                <div class="border-2 border-dashed rounded-xl p-6 text-center">
+                  <input type="file" id="tryon-upload-input" accept="image/*" class="hidden">
+                  <label for="tryon-upload-input" class="cursor-pointer text-gray-500 dark:text-gray-300">
+                    Click to upload face/body photo
+                  </label>
+                  <div id="tryon-preview-container" class="mt-4 hidden">
+                    <img id="tryon-preview-img" class="w-40 h-40 rounded-xl object-cover mx-auto">
+                  </div>
+                </div>
+              </div>
+        
+              <!-- Outfit Options -->
+              <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
+                <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-100">
+                  Choose Outfit
+                </h3>
+                <div class="grid grid-cols-2 gap-4" id="tryon-outfits">
+                  <button class="tryon-outfit bg-gray-100 dark:bg-gray-700 p-3 rounded-lg" data-outfit="red dress">👗 Red Dress</button>
+                  <button class="tryon-outfit bg-gray-100 dark:bg-gray-700 p-3 rounded-lg" data-outfit="jacket">🧥 Jacket</button>
+                  <button class="tryon-outfit bg-gray-100 dark:bg-gray-700 p-3 rounded-lg" data-outfit="t-shirt">👚 T-Shirt</button>
+                  <button class="tryon-outfit bg-gray-100 dark:bg-gray-700 p-3 rounded-lg" data-outfit="wedding gown">👰 Wedding Gown</button>
+                </div>
+              </div>
+            </div>
+        
+            <!-- Generate Try-On -->
+            <div class="text-center mt-10">
+              <button id="tryon-generate-btn" class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition">
+                Generate Outfit ✨
+              </button>
+            </div>
+        
+            <!-- Try-On Result -->
+            <div id="tryon-result-container" class="mt-10 hidden text-center">
+              <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-100">Result</h3>
+              <img id="tryon-result-img" class="max-w-md mx-auto rounded-xl shadow-lg">
+              <div class="mt-4">
+                <button id="tryon-download-btn" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">Download</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <!-- Prompt Bar -->
         <footer class="fixed bottom-0 left-0 right-0 p-4 z-40 bg-transparent p-6 shadow-none">
             <div id="prompt-bar-container" class="max-w-2xl mx-auto bg-white/70 dark:bg-gray-700/70 backdrop-blur-lg rounded-full p-2 flex items-center space-x-1.5">
@@ -277,6 +335,7 @@
         <script type="module" src="script.js"></script>
     </body>
 </html>
+
 
 
 
