@@ -515,6 +515,93 @@ function downloadPreviewImage() {
         .catch(() => alert('An error occurred while downloading the image.'));
 }
 
+// --- Virtual Try-On Logic ---
+let tryonImageData = null;
+let tryonOutfit = null;
+
+// Outfit selection
+document.querySelectorAll(".tryon-outfit").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tryon-outfit").forEach(b => b.classList.remove("ring-2", "ring-blue-500"));
+    btn.classList.add("ring-2", "ring-blue-500");
+    tryonOutfit = btn.dataset.outfit;
+  });
+});
+
+// Upload preview
+const tryonUploadInput = document.getElementById("tryon-upload-input");
+if (tryonUploadInput) {
+  tryonUploadInput.addEventListener("change", e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      document.getElementById("tryon-preview-img").src = reader.result;
+      document.getElementById("tryon-preview-container").classList.remove("hidden");
+      tryonImageData = { mimeType: file.type, data: reader.result.split(',')[1] };
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// Generate outfit
+const tryonGenerateBtn = document.getElementById("tryon-generate-btn");
+if (tryonGenerateBtn) {
+  tryonGenerateBtn.addEventListener("click", async () => {
+    if (!tryonImageData || !tryonOutfit) {
+      alert("Please upload a photo and select an outfit.");
+      return;
+    }
+
+    try {
+      const token = await currentUser?.getIdToken();
+      if (!token) {
+        toggleModal(DOMElements.authModal, true);
+        return;
+      }
+
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+        body: JSON.stringify({
+          prompt: `Make this person wear a ${tryonOutfit}`,
+          imageData: tryonImageData,
+          aspectRatio: "1:1"
+        })
+      });
+
+      if (!response.ok) throw new Error("AI generation failed.");
+      const result = await response.json();
+
+      const base64Data = result?.candidates?.[0]?.content?.parts?.find(p => p.inlineData)?.inlineData?.data 
+                       || result.predictions?.[0]?.bytesBase64Encoded;
+
+      if (!base64Data) throw new Error("No result image.");
+
+      const imgUrl = `data:image/png;base64,${base64Data}`;
+      document.getElementById("tryon-result-img").src = imgUrl;
+      document.getElementById("tryon-result-container").classList.remove("hidden");
+
+    } catch (err) {
+      console.error(err);
+      alert("Error generating try-on: " + err.message);
+    }
+  });
+}
+
+// Download result
+const tryonDownloadBtn = document.getElementById("tryon-download-btn");
+if (tryonDownloadBtn) {
+  tryonDownloadBtn.addEventListener("click", () => {
+    const url = document.getElementById("tryon-result-img").src;
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "virtual-tryon.png";
+    a.click();
+  });
+}
+
+
 
 
 // DARK MODE TOGGLE
@@ -541,6 +628,7 @@ darkModeToggle.addEventListener('click', () => {
         darkModeToggle.textContent = '🌙'; // moon icon
     }
 });
+
 
 
 
