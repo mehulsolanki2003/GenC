@@ -56,7 +56,7 @@
         <!-- Main Content -->
         <main class="relative z-10 pb-40">
             <!-- Added padding-bottom to avoid overlap with fixed footer -->
-            <div id="first-screen-content" class="max-w-7xl mx-auto flex justify-between items-center">
+            <div id="first-screen-content" class=" min-h-screen flex flex-col items-center justify-center text-center p-4  bg-white dark:bg-gray-900 transition-colors duration-500r">
                 <!-- Hero Section -->
                 <section id="hero-section">
                     <h1 id="hero-headline" class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-800 dark:text-gray-100 tracking-tighter">Turn imagination into visuals in seconds.
@@ -151,7 +151,7 @@
         </main>
         <!-- Prompt Bar -->
         <footer class="fixed bottom-0 left-0 right-0 p-4 z-40 bg-white/80 dark:bg-gray-900 shadow-none">
-            <div id="prompt-bar-container" class="max-w-2xl mx-auto bg-white/70 backdrop-blur-lg border border-gray-200/80 shadow-2xl rounded-full p-2 flex items-center space-x-1.5">
+            <div id="prompt-bar-container" class="max-w-2xl mx-auto bg-white/70 dark:bg-gray-700/70 backdrop-blur-lg rounded-full p-2 flex items-center space-x-1.5">
                 <div id="image-preview-container" class="hidden relative w-10 h-10 flex-shrink-0 ml-1">
                     <img id="image-preview" class="w-full h-full object-cover rounded-full" src="" alt="Image preview">
                     <button id="remove-image-btn" class="absolute -top-1 -right-1 bg-gray-700 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs hover:bg-black">&times;</button>
@@ -277,6 +277,7 @@
         <script type="module" src="script.js"></script>
     </body>
 </html>
+
 
 
 
