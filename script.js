@@ -566,7 +566,7 @@ const tutorialsData = {
     { img: "p1.png", desc: "Futuristic neon jacket" },
     { img: "p2.png", desc: "Luxury fashion gown" },
     { img: "p3.png", desc: "Streetwear in Tokyo" },
-    { img: "p2.png", desc: "A streetwear outfit in cyberpunk Tokyo at night" }
+    { img: "p4.png", desc: "A streetwear outfit in cyberpunk Tokyo at night" }
   ]
 };
 
@@ -618,6 +618,7 @@ function renderAITutorials() {
 }
 
 document.addEventListener("DOMContentLoaded", renderAITutorials);
+
 
 
 
