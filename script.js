@@ -515,91 +515,7 @@ function downloadPreviewImage() {
         .catch(() => alert('An error occurred while downloading the image.'));
 }
 
-// --- Virtual Try-On Logic ---
-let tryonImageData = null;
-let tryonOutfit = null;
 
-// Outfit selection
-document.querySelectorAll(".tryon-outfit").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".tryon-outfit").forEach(b => b.classList.remove("ring-2", "ring-blue-500"));
-    btn.classList.add("ring-2", "ring-blue-500");
-    tryonOutfit = btn.dataset.outfit;
-  });
-});
-
-// Upload preview
-const tryonUploadInput = document.getElementById("tryon-upload-input");
-if (tryonUploadInput) {
-  tryonUploadInput.addEventListener("change", e => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      document.getElementById("tryon-preview-img").src = reader.result;
-      document.getElementById("tryon-preview-container").classList.remove("hidden");
-      tryonImageData = { mimeType: file.type, data: reader.result.split(',')[1] };
-    };
-    reader.readAsDataURL(file);
-  });
-}
-
-// Generate outfit
-const tryonGenerateBtn = document.getElementById("tryon-generate-btn");
-if (tryonGenerateBtn) {
-  tryonGenerateBtn.addEventListener("click", async () => {
-    if (!tryonImageData || !tryonOutfit) {
-      alert("Please upload a photo and select an outfit.");
-      return;
-    }
-
-    try {
-      const token = await currentUser?.getIdToken();
-      if (!token) {
-        toggleModal(DOMElements.authModal, true);
-        return;
-      }
-
-      const response = await fetch("/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-        body: JSON.stringify({
-          prompt: `Make this person wear a ${tryonOutfit}`,
-          imageData: tryonImageData,
-          aspectRatio: "1:1"
-        })
-      });
-
-      if (!response.ok) throw new Error("AI generation failed.");
-      const result = await response.json();
-
-      const base64Data = result?.candidates?.[0]?.content?.parts?.find(p => p.inlineData)?.inlineData?.data 
-                       || result.predictions?.[0]?.bytesBase64Encoded;
-
-      if (!base64Data) throw new Error("No result image.");
-
-      const imgUrl = `data:image/png;base64,${base64Data}`;
-      document.getElementById("tryon-result-img").src = imgUrl;
-      document.getElementById("tryon-result-container").classList.remove("hidden");
-
-    } catch (err) {
-      console.error(err);
-      alert("Error generating try-on: " + err.message);
-    }
-  });
-}
-
-// Download result
-const tryonDownloadBtn = document.getElementById("tryon-download-btn");
-if (tryonDownloadBtn) {
-  tryonDownloadBtn.addEventListener("click", () => {
-    const url = document.getElementById("tryon-result-img").src;
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "virtual-tryon.png";
-    a.click();
-  });
-}
 
 
 
@@ -628,6 +544,79 @@ darkModeToggle.addEventListener('click', () => {
         darkModeToggle.textContent = '🌙'; // moon icon
     }
 });
+
+// --- AI Tutorials / Inspiration ---
+
+const tutorialsData = {
+  promptExamples: [
+    { prompt: "A streetwear outfit in cyberpunk Tokyo at night", note: "Good for edgy AI fashion inspiration." },
+    { prompt: "Professional studio shot of a model wearing a summer dress", note: "Clean fashion catalog vibes." },
+    { prompt: "Artistic portrait in watercolor style, elegant gown", note: "Great for experimental art direction." }
+  ],
+  beforeAfter: [
+    { before: "images/tutorials/before1.jpg", after: "images/tutorials/after1.jpg", desc: "Adding a futuristic neon jacket" },
+    { before: "images/tutorials/before2.jpg", after: "images/tutorials/after2.jpg", desc: "Changing casual look to formal wear" }
+  ],
+  bestPractices: [
+    "Always use high-resolution, well-lit photos for uploads.",
+    "Keep prompts short, but add 1-2 descriptive keywords (e.g., 'editorial', 'luxury').",
+    "Avoid conflicting instructions like 'streetwear suit gown'.",
+    "Use try-on with consistent poses (frontal or profile) for better results."
+  ]
+};
+
+function renderAITutorials() {
+  // Prompt Examples
+  const promptContainer = document.getElementById("prompt-examples");
+  if (promptContainer) {
+    tutorialsData.promptExamples.forEach(ex => {
+      const div = document.createElement("div");
+      div.className = "p-4 bg-white dark:bg-gray-800 rounded-xl shadow";
+      div.innerHTML = `
+        <p class="text-gray-800 dark:text-gray-100 font-medium">"${ex.prompt}"</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">${ex.note}</p>
+      `;
+      promptContainer.appendChild(div);
+    });
+  }
+
+  // Before vs After
+  const beforeAfterContainer = document.getElementById("before-after");
+  if (beforeAfterContainer) {
+    tutorialsData.beforeAfter.forEach(pair => {
+      const div = document.createElement("div");
+      div.className = "relative bg-white dark:bg-gray-800 rounded-xl shadow overflow-hidden";
+      div.innerHTML = `
+        <div class="grid grid-cols-2">
+          <div>
+            <img src="${pair.before}" alt="Before" class="w-full h-full object-cover">
+            <p class="text-center text-xs text-gray-500 dark:text-gray-400">Before</p>
+          </div>
+          <div>
+            <img src="${pair.after}" alt="After" class="w-full h-full object-cover">
+            <p class="text-center text-xs text-gray-500 dark:text-gray-400">After</p>
+          </div>
+        </div>
+        <p class="p-2 text-sm text-center text-gray-600 dark:text-gray-300">${pair.desc}</p>
+      `;
+      beforeAfterContainer.appendChild(div);
+    });
+  }
+
+  // Best Practices
+  const bestList = document.getElementById("best-practices");
+  if (bestList) {
+    tutorialsData.bestPractices.forEach(bp => {
+      const li = document.createElement("li");
+      li.textContent = bp;
+      bestList.appendChild(li);
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", renderAITutorials);
+
+
 
 
 
