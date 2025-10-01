@@ -644,7 +644,7 @@ function renderGrid() {
   for (let i = 0; i < visibleSlots; i++) {
     const imgData = aiImages[(currentIndex + i) % aiImages.length];
     const div = document.createElement("div");
-    div.className = "relative overflow-hidden rounded-xl shadow-lg group";
+    div.className = "relative overflow-hidden rounded-xl shadow-lg border-2 border-gray-700 group cursor-pointer";
     div.innerHTML = `
       <img src="${imgData.src}" alt="${imgData.desc}" 
         class="w-full h-48 object-cover transition duration-500 transform group-hover:scale-105">
@@ -652,6 +652,8 @@ function renderGrid() {
         <p class="text-xs text-gray-200">${imgData.desc}</p>
       </div>
     `;
+    // Click to open modal
+    div.addEventListener("click", () => openModal(imgData.src, imgData.desc));
     gridContainer.appendChild(div);
   }
 }
@@ -661,7 +663,6 @@ function autoUpdateGrid() {
   const slots = gridContainer.children;
   if (!slots.length) return;
 
-  // Pick a random slot to replace
   const randomSlot = Math.floor(Math.random() * slots.length);
   currentIndex = (currentIndex + 1) % aiImages.length;
   const newImgData = aiImages[currentIndex];
@@ -670,21 +671,48 @@ function autoUpdateGrid() {
   const img = slot.querySelector("img");
   const caption = slot.querySelector("p");
 
-  // Fade out, change image, fade in
   img.style.opacity = 0;
   setTimeout(() => {
     img.src = newImgData.src;
     caption.textContent = newImgData.desc;
     img.style.opacity = 1;
   }, 500);
+
+  // Update click handler for modal
+  slot.onclick = () => openModal(newImgData.src, newImgData.desc);
 }
+
+// Modal functionality
+const modal = document.getElementById("image-modal");
+const modalImg = document.getElementById("modal-img");
+const modalCaption = document.getElementById("modal-caption");
+const closeModalBtn = document.getElementById("close-modal");
+
+function openModal(src, desc) {
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+  modalImg.src = src;
+  modalCaption.textContent = desc;
+}
+
+function closeModal() {
+  modal.classList.remove("flex");
+  modal.classList.add("hidden");
+}
+
+closeModalBtn.addEventListener("click", closeModal);
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) closeModal();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeModal();
+});
 
 // Run on load
 document.addEventListener("DOMContentLoaded", () => {
   renderGrid();
-  setInterval(autoUpdateGrid, 3000); // change one image every 3s
+  setInterval(autoUpdateGrid, 3000);
 });
-
 
 
 
