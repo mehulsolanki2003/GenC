@@ -169,19 +169,27 @@
               </div>
             </section>
 
-            <section id="ai-showcase" class="relative py-16 bg-gradient-to-b from-gray-900 via-black to-gray-900">
-              <div class="text-center mb-10">
-                <h2 class="text-4xl md:text-5xl font-extrabold text-white">
-                  Use AI today for <span class="text-purple-400">Architecture</span>, 
-                  <span class="text-blue-400">Interior Design</span>, 
-                  <span class="text-pink-400">Fashion</span> and more
-                </h2>
-              </div>
-            
-              <!-- Image Grid -->
-              <div id="ai-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-6 max-w-7xl mx-auto">
-                <!-- Images will be inserted dynamically here -->
-              </div>
+         <section id="ai-showcase" class="relative py-16 bg-gradient-to-b from-gray-900 via-black to-gray-900">
+          <div class="text-center mb-10">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-white">
+              Use AI today for <span class="text-purple-400">Architecture</span>, 
+              <span class="text-blue-400">Interior Design</span>, 
+              <span class="text-pink-400">Fashion</span> and more
+            </h2>
+          </div>
+        
+          <!-- Image Grid -->
+          <div id="ai-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-6 max-w-7xl mx-auto">
+            <!-- Images will be inserted dynamically here -->
+          </div>
+        </section>
+        
+        <!-- Modal -->
+        <div id="image-modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50">
+          <span id="close-modal" class="absolute top-5 right-5 text-white text-3xl cursor-pointer">&times;</span>
+          <img id="modal-img" src="" alt="" class="max-h-[90%] max-w-[90%] rounded-xl border-4 border-white shadow-lg">
+          <p id="modal-caption" class="text-center text-gray-300 mt-4"></p>
+        </div>
 
 
         </main>
@@ -315,6 +323,7 @@
         <script type="module" src="script.js"></script>
     </body>
 </html>
+
 
 
 
