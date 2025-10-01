@@ -151,61 +151,59 @@
             </section>
         </main>
 
-        <section id="virtual-tryon" class="py-20 bg-gray-50 dark:bg-gray-900">
-          <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center text-gray-800 dark:text-white mb-10">
-              👗 Virtual Fashion Try-On
-            </h2>
-        
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-              
-              <!-- Upload User Photo -->
-              <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
-                <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-100">
-                  Upload Your Photo
-                </h3>
-                <div class="border-2 border-dashed rounded-xl p-6 text-center">
-                  <input type="file" id="tryon-upload-input" accept="image/*" class="hidden">
-                  <label for="tryon-upload-input" class="cursor-pointer text-gray-500 dark:text-gray-300">
-                    Click to upload face/body photo
-                  </label>
-                  <div id="tryon-preview-container" class="mt-4 hidden">
-                    <img id="tryon-preview-img" class="w-40 h-40 rounded-xl object-cover mx-auto">
-                  </div>
-                </div>
-              </div>
-        
-              <!-- Outfit Options -->
-              <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
-                <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-100">
-                  Choose Outfit
-                </h3>
-                <div class="grid grid-cols-2 gap-4" id="tryon-outfits">
-                  <button class="tryon-outfit bg-gray-100 dark:bg-gray-700 p-3 rounded-lg" data-outfit="red dress">👗 Red Dress</button>
-                  <button class="tryon-outfit bg-gray-100 dark:bg-gray-700 p-3 rounded-lg" data-outfit="jacket">🧥 Jacket</button>
-                  <button class="tryon-outfit bg-gray-100 dark:bg-gray-700 p-3 rounded-lg" data-outfit="t-shirt">👚 T-Shirt</button>
-                  <button class="tryon-outfit bg-gray-100 dark:bg-gray-700 p-3 rounded-lg" data-outfit="wedding gown">👰 Wedding Gown</button>
-                </div>
-              </div>
+        <section id="ai-tutorials" class="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
+            <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between mb-8">
+            <div>
+            <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-100">AI Tutorials & Inspiration</h2>
+            <p class="mt-2 text-sm text-gray-600 dark:text-gray-300 max-w-xl">Learn to write better prompts, see before/after examples, and follow best practices for fashion try-on to get consistent, realistic results.</p>
             </div>
-        
-            <!-- Generate Try-On -->
-            <div class="text-center mt-10">
-              <button id="tryon-generate-btn" class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition">
-                Generate Outfit ✨
-              </button>
+            <div class="hidden md:flex items-center space-x-3">
+            <button class="prompt-filter bg-white/80 dark:bg-gray-800 border border-slate-200/80 dark:border-gray-700 px-3 py-2 rounded-md text-sm font-medium" data-filter="all">All</button>
+            <button class="prompt-filter bg-white/80 dark:bg-gray-800 border border-slate-200/80 dark:border-gray-700 px-3 py-2 rounded-md text-sm font-medium" data-filter="fashion">Fashion</button>
+            <button class="prompt-filter bg-white/80 dark:bg-gray-800 border border-slate-200/80 dark:border-gray-700 px-3 py-2 rounded-md text-sm font-medium" data-filter="art">Art</button>
+            <button class="prompt-filter bg-white/80 dark:bg-gray-800 border border-slate-200/80 dark:border-gray-700 px-3 py-2 rounded-md text-sm font-medium" data-filter="portrait">Portrait</button>
             </div>
-        
-            <!-- Try-On Result -->
-            <div id="tryon-result-container" class="mt-10 hidden text-center">
-              <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-100">Result</h3>
-              <img id="tryon-result-img" class="max-w-md mx-auto rounded-xl shadow-lg">
-              <div class="mt-4">
-                <button id="tryon-download-btn" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">Download</button>
-              </div>
             </div>
-          </div>
-        </section>
+            
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Prompt Examples (Left Column) -->
+            <div class="space-y-4">
+            <h3 class="font-semibold text-gray-700 dark:text-gray-200">Prompt Examples</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Tap <strong>Use</strong> to insert into the prompt bar or <strong>Copy</strong> to copy to clipboard.</p>
+            
+            
+            <div class="prompt-list grid grid-cols-1 gap-3">
+            <!-- Example prompt card -->
+            <div class="prompt-card bg-white dark:bg-gray-800 border border-slate-200/80 dark:border-gray-700 rounded-lg p-3 shadow-sm" data-category="fashion">
+            <p class="text-xs uppercase text-slate-400 mb-2">Fashion — Streetwear</p>
+            <pre class="prompt-text text-sm whitespace-pre-wrap text-gray-800 dark:text-gray-100">A high-fashion streetwear editorial shot, young model in oversized bomber jacket, cinematic lighting, shallow depth of field, 50mm, color grading: teal & orange, photorealistic</pre>
+            <div class="mt-3 flex items-center space-x-2">
+            <button class="copy-btn px-3 py-1.5 rounded-md border text-sm" aria-label="Copy prompt">Copy</button>
+            <button class="use-btn px-3 py-1.5 rounded-md bg-[#517CBE] text-white text-sm" data-aspect="4:5" aria-label="Use this prompt">Use</button>
+            <button class="preview-btn ml-auto px-3 py-1.5 rounded-md border text-sm" aria-label="Preview example">Preview</button>
+            </div>
+            </div>
+            
+            
+            <div class="prompt-card bg-white dark:bg-gray-800 border border-slate-200/80 dark:border-gray-700 rounded-lg p-3 shadow-sm" data-category="art">
+            <p class="text-xs uppercase text-slate-400 mb-2">Art — Cyberpunk</p>
+            <pre class="prompt-text text-sm whitespace-pre-wrap text-gray-800 dark:text-gray-100">Cyberpunk cityscape at night, neon reflections, rainy street, ultra-detailed, 35mm lens, volumetric fog, blending of analog film grain with hyper-realistic lighting</pre>
+            <div class="mt-3 flex items-center space-x-2">
+            <button class="copy-btn px-3 py-1.5 rounded-md border text-sm">Copy</button>
+            <button class="use-btn px-3 py-1.5 rounded-md bg-[#517CBE] text-white text-sm" data-aspect="16:9">Use</button>
+            <button class="preview-btn ml-auto px-3 py-1.5 rounded-md border text-sm">Preview</button>
+            </div>
+            </div>
+            
+            
+            <div class="prompt-card bg-white dark:bg-gray-800 border border-slate-200/80 dark:border-gray-700 rounded-lg p-3 shadow-sm" data-category="portrait">
+            <p class="text-xs uppercase text-slate-400 mb-2">Portrait — Soft Studio</p>
+            <pre class="prompt-text text-sm whitespace-pre-wrap text-gray-800 dark:text-gray-100">Close-up portrait, softbox lighting, high-key, natural skin tones, 85mm, subtle retouching, cinematic color grade</pre>
+            <div class="mt-3 flex items-center space-x-2">
+            <button class="copy-btn px-3 py-1.5 rounded-md border text-sm">Copy</button>
+            </div>
 
         <!-- Prompt Bar -->
         <footer class="fixed bottom-0 left-0 right-0 p-4 z-40 bg-transparent p-6 shadow-none">
@@ -335,6 +333,7 @@
         <script type="module" src="script.js"></script>
     </body>
 </html>
+
 
 
 
