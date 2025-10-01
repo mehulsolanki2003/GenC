@@ -609,7 +609,7 @@ function renderAITutorials() {
       const div = document.createElement("div");
       div.className = "overflow-hidden rounded-xl shadow bg-white dark:bg-gray-800";
       div.innerHTML = `
-        <img src="${imgData.img}" alt="${imgData.desc}" class="w-full h-48 object-cover">
+        <img src="${imgData.img}" alt="${imgData.desc}" class="w-full h-65 object-cover">
         <p class="p-3 text-sm text-gray-600 dark:text-gray-300">${imgData.desc}</p>
       `;
       aiGallery.appendChild(div);
@@ -618,6 +618,7 @@ function renderAITutorials() {
 }
 
 document.addEventListener("DOMContentLoaded", renderAITutorials);
+
 
 
 
