@@ -549,19 +549,23 @@ darkModeToggle.addEventListener('click', () => {
 
 const tutorialsData = {
   promptExamples: [
-    { prompt: "A streetwear outfit in cyberpunk Tokyo at night", note: "Good for edgy AI fashion inspiration." },
-    { prompt: "Professional studio shot of a model wearing a summer dress", note: "Clean fashion catalog vibes." },
-    { prompt: "Artistic portrait in watercolor style, elegant gown", note: "Great for experimental art direction." }
+    { 
+      prompt: "A streetwear outfit in cyberpunk Tokyo at night", 
+      note: "Good for edgy AI fashion inspiration." 
+    },
+    { 
+      prompt: "Professional studio shot of a model wearing a summer dress", 
+      note: "Clean fashion catalog vibes." 
+    },
+    { 
+      prompt: "Artistic portrait in watercolor style, elegant gown", 
+      note: "Great for experimental art direction." 
+    }
   ],
-  beforeAfter: [
-    { before: "before.jpg", after: "after.png", desc: "Adding a Radha Krishn in img" },
-    { before: "before1.jpg", after: "after1.png", desc: "adding rainy weather " }
-  ],
-  bestPractices: [
-    "Always use high-resolution, well-lit photos for uploads.",
-    "Keep prompts short, but add 1-2 descriptive keywords (e.g., 'editorial', 'luxury').",
-    "Avoid conflicting instructions like 'streetwear suit gown'.",
-    "Use try-on with consistent poses (frontal or profile) for better results."
+  aiGallery: [
+    { img: "assets/generated1.png", desc: "Futuristic neon jacket" },
+    { img: "assets/generated2.png", desc: "Luxury fashion gown" },
+    { img: "assets/generated3.png", desc: "Streetwear in Tokyo" }
   ]
 };
 
@@ -571,50 +575,50 @@ function renderAITutorials() {
   if (promptContainer) {
     tutorialsData.promptExamples.forEach(ex => {
       const div = document.createElement("div");
-      div.className = "p-4 bg-white dark:bg-gray-800 rounded-xl shadow";
+      div.className = "p-4 bg-white dark:bg-gray-800 rounded-xl shadow flex flex-col justify-between";
       div.innerHTML = `
-        <p class="text-gray-800 dark:text-gray-100 font-medium">"${ex.prompt}"</p>
-        <p class="text-sm text-gray-500 dark:text-gray-400">${ex.note}</p>
+        <div>
+          <p class="text-gray-800 dark:text-gray-100 font-medium">"${ex.prompt}"</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mb-3">${ex.note}</p>
+        </div>
+        <button class="try-btn w-full px-3 py-2 mt-auto bg-[#517CBE] text-white rounded-lg hover:bg-opacity-90 transition">
+          Try Now
+        </button>
       `;
+      // Add event listener for "Try Now"
+      div.querySelector(".try-btn").addEventListener("click", () => {
+        const input = document.getElementById("prompt-input");
+        if (input) {
+          input.value = ex.prompt;
+          input.focus();
+          // auto resize if your function exists
+          if (typeof autoResizeTextarea === "function") {
+            autoResizeTextarea({ target: input });
+          }
+        }
+      });
       promptContainer.appendChild(div);
     });
   }
 
-  // Before vs After
-  const beforeAfterContainer = document.getElementById("before-after");
-  if (beforeAfterContainer) {
-    tutorialsData.beforeAfter.forEach(pair => {
+  // AI Gallery
+  const aiGallery = document.getElementById("ai-gallery");
+  if (aiGallery) {
+    tutorialsData.aiGallery.forEach(imgData => {
       const div = document.createElement("div");
-      div.className = "relative bg-white dark:bg-gray-800 rounded-xl shadow overflow-hidden";
+      div.className = "overflow-hidden rounded-xl shadow bg-white dark:bg-gray-800";
       div.innerHTML = `
-        <div class="grid grid-cols-2">
-          <div>
-            <img src="${pair.before}" alt="Before" class="w-full h-full object-cover">
-            <p class="text-center text-xs text-gray-500 dark:text-gray-400">Before</p>
-          </div>
-          <div>
-            <img src="${pair.after}" alt="After" class="w-full h-full object-cover">
-            <p class="text-center text-xs text-gray-500 dark:text-gray-400">After</p>
-          </div>
-        </div>
-        <p class="p-2 text-sm text-center text-gray-600 dark:text-gray-300">${pair.desc}</p>
+        <img src="${imgData.img}" alt="${imgData.desc}" class="w-full h-48 object-cover">
+        <p class="p-3 text-sm text-gray-600 dark:text-gray-300">${imgData.desc}</p>
       `;
-      beforeAfterContainer.appendChild(div);
-    });
-  }
-
-  // Best Practices
-  const bestList = document.getElementById("best-practices");
-  if (bestList) {
-    tutorialsData.bestPractices.forEach(bp => {
-      const li = document.createElement("li");
-      li.textContent = bp;
-      bestList.appendChild(li);
+      aiGallery.appendChild(div);
     });
   }
 }
 
 document.addEventListener("DOMContentLoaded", renderAITutorials);
+
+
 
 
 
