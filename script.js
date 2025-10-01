@@ -619,6 +619,73 @@ function renderAITutorials() {
 
 document.addEventListener("DOMContentLoaded", renderAITutorials);
 
+// -----------------------------
+// Dynamic AI Image Showcase
+// -----------------------------
+const aiImages = [
+  { src: "p1.png", desc: "Cinematic interior design" },
+  { src: "p2.png", desc: "Luxury hotel lobby" },
+  { src: "p3.png", desc: "Futuristic fashion portrait" },
+  { src: "p4.png", desc: "Cyberpunk streetwear" },
+  { src: "p1.png", desc: "Architectural concept" },
+  { src: "p2.png", desc: "Modern living room" },
+  { src: "p3.png", desc: "Golden chandelier" },
+  { src: "p4.png", desc: "High-end lounge" }
+];
+
+// Grid settings
+const gridContainer = document.getElementById("ai-grid");
+const visibleSlots = 8; // number of slots shown in grid
+let currentIndex = 0;
+
+// Initialize grid
+function renderGrid() {
+  gridContainer.innerHTML = "";
+  for (let i = 0; i < visibleSlots; i++) {
+    const imgData = aiImages[(currentIndex + i) % aiImages.length];
+    const div = document.createElement("div");
+    div.className = "relative overflow-hidden rounded-xl shadow-lg group";
+    div.innerHTML = `
+      <img src="${imgData.src}" alt="${imgData.desc}" 
+        class="w-full h-48 object-cover transition duration-500 transform group-hover:scale-105">
+      <div class="absolute bottom-0 w-full bg-gradient-to-t from-black/80 to-transparent p-2">
+        <p class="text-xs text-gray-200">${imgData.desc}</p>
+      </div>
+    `;
+    gridContainer.appendChild(div);
+  }
+}
+
+// Auto update one image slot at a time
+function autoUpdateGrid() {
+  const slots = gridContainer.children;
+  if (!slots.length) return;
+
+  // Pick a random slot to replace
+  const randomSlot = Math.floor(Math.random() * slots.length);
+  currentIndex = (currentIndex + 1) % aiImages.length;
+  const newImgData = aiImages[currentIndex];
+
+  const slot = slots[randomSlot];
+  const img = slot.querySelector("img");
+  const caption = slot.querySelector("p");
+
+  // Fade out, change image, fade in
+  img.style.opacity = 0;
+  setTimeout(() => {
+    img.src = newImgData.src;
+    caption.textContent = newImgData.desc;
+    img.style.opacity = 1;
+  }, 500);
+}
+
+// Run on load
+document.addEventListener("DOMContentLoaded", () => {
+  renderGrid();
+  setInterval(autoUpdateGrid, 3000); // change one image every 3s
+});
+
+
 
 
 
