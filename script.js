@@ -554,8 +554,8 @@ const tutorialsData = {
     { prompt: "Artistic portrait in watercolor style, elegant gown", note: "Great for experimental art direction." }
   ],
   beforeAfter: [
-    { before: "images/tutorials/before1.jpg", after: "images/tutorials/after1.jpg", desc: "Adding a futuristic neon jacket" },
-    { before: "images/tutorials/before2.jpg", after: "images/tutorials/after2.jpg", desc: "Changing casual look to formal wear" }
+    { before: "assets/before.jpg", after: "assets/after.jpg", desc: "Adding a futuristic neon jacket" },
+    { before: "assets/before1.jpg", after: "assets/after1.gpj", desc: "Changing casual look to formal wear" }
   ],
   bestPractices: [
     "Always use high-resolution, well-lit photos for uploads.",
@@ -615,6 +615,7 @@ function renderAITutorials() {
 }
 
 document.addEventListener("DOMContentLoaded", renderAITutorials);
+
 
 
 
