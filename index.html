@@ -169,27 +169,44 @@
               </div>
             </section>
 
-         <section id="ai-showcase" class="relative py-16 bg-gradient-to-b from-gray-900 via-black to-gray-900">
-          <div class="text-center mb-10">
-            <h2 class="text-4xl md:text-5xl font-extrabold text-white">
-              Use AI today for <span class="text-purple-400">Architecture</span>, 
-              <span class="text-blue-400">Interior Design</span>, 
-              <span class="text-pink-400">Fashion</span> and more
-            </h2>
-          </div>
-        
-          <!-- Image Grid -->
-          <div id="ai-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-6 max-w-7xl mx-auto">
-            <!-- Images will be inserted dynamically here -->
-          </div>
-        </section>
-        
-        <!-- Modal -->
-        <div id="image-modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50">
-          <span id="close-modal" class="absolute top-5 right-5 text-white text-3xl cursor-pointer">&times;</span>
-          <img id="modal-img" src="" alt="" class="max-h-[90%] max-w-[90%] rounded-xl border-4 border-white shadow-lg">
-          <p id="modal-caption" class="text-center text-gray-300 mt-4"></p>
-        </div>
+            <section id="ai-showcase" class="relative py-16 bg-gradient-to-b from-gray-900 via-black to-gray-900">
+              <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white">
+                  Use AI today for 
+                  <span class="text-purple-400">Architecture</span>, 
+                  <span class="text-blue-400">Interior Design</span>, 
+                  <span class="text-pink-400">Fashion</span> and more
+                </h2>
+            
+                <!-- Smooth Scrolling Words -->
+                <div class="carousel-container mt-10">
+                  <div id="carousel-track" class="carousel-track">
+                    <span class="word">Luxury Hotel Lobby</span>
+                    <span class="word">Modern Architecture Skyline</span>
+                    <span class="word">Elegant Fashion Runway</span>
+                    <span class="word">Minimalist Interior Design</span>
+                    <span class="word">Futuristic Cityscape</span>
+                    <span class="word">Luxury Bar Lounge</span>
+            
+                    <!-- Duplicate for infinite scroll -->
+                    <span class="word">Luxury Hotel Lobby</span>
+                    <span class="word">Modern Architecture Skyline</span>
+                    <span class="word">Elegant Fashion Runway</span>
+                    <span class="word">Minimalist Interior Design</span>
+                    <span class="word">Futuristic Cityscape</span>
+                    <span class="word">Luxury Bar Lounge</span>
+                  </div>
+                </div>
+              </div>
+            
+              <!-- Showcase Image -->
+              <div class="flex justify-center mt-10">
+                <img id="showcase-image" 
+                     src="" 
+                     alt="AI Showcase" 
+                     class="rounded-2xl border-4 border-white/20 shadow-2xl max-w-4xl opacity-0">
+              </div>
+            </section>
 
 
         </main>
@@ -323,6 +340,7 @@
         <script type="module" src="script.js"></script>
     </body>
 </html>
+
 
 
 
