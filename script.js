@@ -716,7 +716,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// Prompts + images
+ // Prompts + images
   const showcaseItems = {
     "Luxury Hotel Lobby": "https://iili.io/K7bN7Hl.md.png",
     "Modern Architecture Skyline": "https://iili.io/K7b6OPV.md.png",
@@ -731,9 +731,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let lastHighlighted = null;
 
   function highlightCenterWord() {
-    const container = document.querySelector(".carousel-container");
-    const containerRect = container.getBoundingClientRect();
-    const centerX = containerRect.left + containerRect.width / 2;
+    let container = document.querySelector(".carousel-container");
+    let containerRect = container.getBoundingClientRect();
+    let containerCenter = containerRect.left + containerRect.width / 2;
 
     let closest = null;
     let minDist = Infinity;
@@ -741,7 +741,7 @@ document.addEventListener("DOMContentLoaded", () => {
     words.forEach(word => {
       const rect = word.getBoundingClientRect();
       const wordCenter = rect.left + rect.width / 2;
-      const dist = Math.abs(centerX - wordCenter);
+      const dist = Math.abs(containerCenter - wordCenter);
 
       if (dist < minDist) {
         minDist = dist;
@@ -762,7 +762,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Run check frequently for smooth effect
+  // Check often so it syncs with scroll
   setInterval(highlightCenterWord, 120);
 
 
