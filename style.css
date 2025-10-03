@@ -243,50 +243,50 @@ body {
 
 
 
-  /* Carousel container */
+ /* Carousel scrolling */
     .carousel-container {
       overflow: hidden;
+      white-space: nowrap;
       position: relative;
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
     }
-
-    /* Track scrolls infinitely */
     .carousel-track {
-      display: flex;
-      gap: 3rem;
-      animation: scroll 25s linear infinite;
+      display: inline-flex;
+      animation: scroll 30s linear infinite; /* slower scroll */
     }
-
     @keyframes scroll {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
     }
 
-    /* Base word style */
+    /* Word styles */
     .word {
-      font-size: 1.2rem;
-      font-weight: 700;
-      opacity: 0.3;
+      font-size: 1.1rem; /* smaller text */
+      font-weight: bold;
+      padding: 0 1.5rem;
       transition: all 0.4s ease;
-      white-space: nowrap;
+      opacity: 0.4;
     }
 
-    /* Highlight style */
+    /* Popup animation */
+    @keyframes popUp {
+      0%   { transform: scale(1); opacity: 0.5; }
+      30%  { transform: scale(1.35); opacity: 1; }
+      70%  { transform: scale(1.35); opacity: 1; } /* hold a bit longer */
+      100% { transform: scale(1.2); opacity: 1; }
+    }
+
     .highlight {
-      font-size: 1.8rem;
-      opacity: 1;
+      animation: popUp 0.8s ease forwards;
       background: linear-gradient(to right, #ec4899, #6366f1);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      transform: scale(1.2);
     }
 
-    /* Image transition */
+    /* Smooth fade transition for images */
     #showcase-image {
       transition: opacity 0.7s ease-in-out;
     }
+
 
 
 
