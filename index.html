@@ -167,42 +167,25 @@
                   <div id="ai-gallery" class="grid gap-6 md:grid-cols-3"></div>
                 </div>
               </div>
-              <section id="ai-showcase" class="relative py-16 bg-gradient-to-b from-gray-900 via-black to-gray-900">
-                      <div class="text-center mb-10">
-                        <h2 class="text-3xl md:text-4xl font-extrabold text-white">
-                          Use GenArt AI for today  
-                          
-                        </h2>
+                 <!-- Scrolling Names Section -->
+                <section id="scrolling-names" class="py-16 bg-gray-50 dark:bg-gray-900">
+                  <div class="max-w-6xl mx-auto px-4">
+                    <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">Our Featured Creators</h2>
                     
-                        <!-- Scrolling words -->
-                        <div class="carousel-container mt-10 w-full max-w-3xl mx-auto">
-                          <div id="carousel-track" class="carousel-track">
-                            <span class="word">Luxury Hotel Lobby</span>
-                            <span class="word">Modern Architecture Skyline</span>
-                            <span class="word">Elegant Fashion Runway</span>
-                            <span class="word">Minimalist Interior Design</span>
-                            <span class="word">Futuristic Cityscape</span>
-                            <span class="word">Luxury Bar Lounge</span>
-                    
-                            <!-- duplicate for seamless loop -->
-                            <span class="word">Luxury Hotel Lobby</span>
-                            <span class="word">Modern Architecture Skyline</span>
-                            <span class="word">Elegant Fashion Runway</span>
-                            <span class="word">Minimalist Interior Design</span>
-                            <span class="word">Futuristic Cityscape</span>
-                            <span class="word">Luxury Bar Lounge</span>
-                          </div>
-                        </div>
-                      </div>
-                    
-                      <!-- Image Showcase -->
-                      <div class="flex justify-center mt-10">
-                        <img id="showcase-image" 
-                             src="" 
-                             alt="AI Showcase" 
-                             class="rounded-2xl border-4 border-white/20 shadow-2xl max-w-4xl opacity-0">
-                      </div>
-              </section>
+                    <!-- Names Scroll -->
+                    <div class="overflow-x-auto whitespace-nowrap py-4">
+                      <button class="name-btn inline-block px-6 py-2 mx-2 bg-blue-100 dark:bg-blue-800 rounded-full text-gray-800 dark:text-white font-semibold hover:bg-blue-200 dark:hover:bg-blue-700" data-img="https://iili.io/K7bN7Hl.md.png">Alice</button>
+                      <button class="name-btn inline-block px-6 py-2 mx-2 bg-blue-100 dark:bg-blue-800 rounded-full text-gray-800 dark:text-white font-semibold hover:bg-blue-200 dark:hover:bg-blue-700" data-img="https://iili.io/K7b6OPV.md.png">Bob</button>
+                      <button class="name-btn inline-block px-6 py-2 mx-2 bg-blue-100 dark:bg-blue-800 rounded-full text-gray-800 dark:text-white font-semibold hover:bg-blue-200 dark:hover:bg-blue-700" data-img="https://iili.io/K7bOTzP.md.png">Charlie</button>
+                      <button class="name-btn inline-block px-6 py-2 mx-2 bg-blue-100 dark:bg-blue-800 rounded-full text-gray-800 dark:text-white font-semibold hover:bg-blue-200 dark:hover:bg-blue-700" data-img="https://iili.io/K7yYoqN.md.png">Diana</button>
+                    </div>
+                
+                    <!-- Image Display -->
+                    <div class="mt-8 flex justify-center">
+                      <img id="name-image-display" src="https://iili.io/K7bN7Hl.md.png" class="w-full max-w-lg rounded-lg shadow-lg transition-all duration-500" alt="Selected Creator">
+                    </div>
+                  </div>
+                </section>
 
 
         </main>
@@ -336,6 +319,7 @@
         <script type="module" src="script.js"></script>
     </body>
 </html>
+
 
 
 
