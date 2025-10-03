@@ -716,54 +716,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
- // Prompts + images
-  const showcaseItems = {
-    "Luxury Hotel Lobby": "https://iili.io/K7bN7Hl.md.png",
-    "Modern Architecture Skyline": "https://iili.io/K7b6OPV.md.png",
-    "Elegant Fashion Runway": "https://iili.io/K7bOTzP.md.png",
-    "Minimalist Interior Design": "https://iili.io/K7yYoqN.md.png",
-    "Futuristic Cityscape": "https://iili.io/K7b894e.md.png",
-    "Luxury Bar Lounge": "https://iili.io/K7bk3Ku.md.png",
+const showcaseItems = {
+    "Luxury Hotel Lobby": "https://iili.io/K7bN7Hl.png",
+    "Modern Architecture Skyline": "https://iili.io/K7b6OPV.png",
+    "Elegant Fashion Runway": "https://iili.io/K7bOTzP.png",
+    "Minimalist Interior Design": "https://iili.io/K7yYoqN.png",
+    "Futuristic Cityscape": "https://iili.io/K7b894e.png",
+    "Luxury Bar Lounge": "https://iili.io/K7bk3Ku.png",
   };
 
-  const words = document.querySelectorAll(".word");
+  const words = document.querySelectorAll(".carousel-track .word");
   const imageEl = document.getElementById("showcase-image");
-  let lastHighlighted = null;
+  let currentIndex = 0;
 
-  function highlightCenterWord() {
-    let container = document.querySelector(".carousel-container");
-    let containerRect = container.getBoundingClientRect();
-    let containerCenter = containerRect.left + containerRect.width / 2;
+  function highlightWord() {
+    // Remove old highlight
+    words.forEach(w => w.classList.remove("highlight"));
 
-    let closest = null;
-    let minDist = Infinity;
+    // Highlight current word
+    const word = words[currentIndex % words.length];
+    word.classList.add("highlight");
 
-    words.forEach(word => {
-      const rect = word.getBoundingClientRect();
-      const wordCenter = rect.left + rect.width / 2;
-      const dist = Math.abs(containerCenter - wordCenter);
-
-      if (dist < minDist) {
-        minDist = dist;
-        closest = word;
-      }
-      word.classList.remove("highlight");
-    });
-
-    if (closest && closest !== lastHighlighted) {
-      closest.classList.add("highlight");
-      lastHighlighted = closest;
-
-      const text = closest.textContent.trim();
-      if (showcaseItems[text]) {
+    // Update image
+    const text = word.textContent.trim();
+    if (showcaseItems[text]) {
+      imageEl.style.opacity = 0;
+      setTimeout(() => {
         imageEl.src = showcaseItems[text];
-        imageEl.classList.remove("opacity-0");
-      }
+        imageEl.style.opacity = 1;
+      }, 300);
     }
+
+    currentIndex++;
   }
 
-  // Check often so it syncs with scroll
-  setInterval(highlightCenterWord, 120);
+  // Highlight a new word every 2 seconds
+  setInterval(highlightWord, 2000);
+
+  // Initialize first word
+  highlightWord();
 
 
 
