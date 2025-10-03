@@ -716,45 +716,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-const showcaseItems = {
-    "Luxury Hotel Lobby": "https://iili.io/K7bN7Hl.png",
-    "Modern Architecture Skyline": "https://iili.io/K7b6OPV.png",
-    "Elegant Fashion Runway": "https://iili.io/K7bOTzP.png",
-    "Minimalist Interior Design": "https://iili.io/K7yYoqN.png",
-    "Futuristic Cityscape": "https://iili.io/K7b894e.png",
-    "Luxury Bar Lounge": "https://iili.io/K7bk3Ku.png",
-  };
 
-  const words = document.querySelectorAll(".carousel-track .word");
-  const imageEl = document.getElementById("showcase-image");
-  let currentIndex = 0;
-
-  function highlightWord() {
-    // Remove old highlight
-    words.forEach(w => w.classList.remove("highlight"));
-
-    // Highlight current word
-    const word = words[currentIndex % words.length];
-    word.classList.add("highlight");
-
-    // Update image
-    const text = word.textContent.trim();
-    if (showcaseItems[text]) {
-      imageEl.style.opacity = 0;
-      setTimeout(() => {
-        imageEl.src = showcaseItems[text];
-        imageEl.style.opacity = 1;
-      }, 300);
-    }
-
-    currentIndex++;
-  }
-
-  // Highlight a new word every 2 seconds
-  setInterval(highlightWord, 2000);
-
-  // Initialize first word
-  highlightWord();
 
 
 
