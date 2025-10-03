@@ -716,6 +716,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+// Prompts + images
+  const showcaseItems = {
+    "Luxury Hotel Lobby": "https://iili.io/K7bN7Hl.md.png",
+    "Modern Architecture Skyline": "https://iili.io/K7b6OPV.md.png",
+    "Elegant Fashion Runway": "https://iili.io/K7bOTzP.md.png",
+    "Minimalist Interior Design": "https://iili.io/K7yYoqN.md.png",
+    "Futuristic Cityscape": "https://iili.io/K7b894e.md.png",
+    "Luxury Bar Lounge": "https://iili.io/K7bk3Ku.md.png",
+  };
+
+  const words = document.querySelectorAll(".word");
+  const imageEl = document.getElementById("showcase-image");
+  let lastHighlighted = null;
+
+  function highlightCenterWord() {
+    const container = document.querySelector(".carousel-container");
+    const containerRect = container.getBoundingClientRect();
+    const centerX = containerRect.left + containerRect.width / 2;
+
+    let closest = null;
+    let minDist = Infinity;
+
+    words.forEach(word => {
+      const rect = word.getBoundingClientRect();
+      const wordCenter = rect.left + rect.width / 2;
+      const dist = Math.abs(centerX - wordCenter);
+
+      if (dist < minDist) {
+        minDist = dist;
+        closest = word;
+      }
+      word.classList.remove("highlight");
+    });
+
+    if (closest && closest !== lastHighlighted) {
+      closest.classList.add("highlight");
+      lastHighlighted = closest;
+
+      const text = closest.textContent.trim();
+      if (showcaseItems[text]) {
+        imageEl.src = showcaseItems[text];
+        imageEl.classList.remove("opacity-0");
+      }
+    }
+  }
+
+  // Run check frequently for smooth effect
+  setInterval(highlightCenterWord, 120);
+
+
+
+
 
 
 
